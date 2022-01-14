@@ -1,0 +1,84 @@
+begin_object: TAM_GIAC[A,B,C];
+ A, B, C : DIEM;
+begin_variables
+ GocA : GOC[C,A,B];
+ GocB : GOC[A,B,C];
+ GocC : GOC[B,C,A];
+ a : DOAN[B,C];
+ b : DOAN[A,C];
+ c : DOAN[A,B];
+ ha,hb,hc,ma,mb,mc,pa,pb,pc : DOAN;
+ S,p,R,r,ra,rb,rc : real;
+end_variables
+begin_constraints
+ S > 0;
+...
+end_constraints
+begin_properties
+end_properties
+begin_computation_relations
+ begin_relation
+ flag = 1
+ Mf ={GocA,GocB,GocC}
+ rf =1
+ vf ={}
+ expf =` GocA + GocB + GocC = Pi `
+ ost=2
+ end_relation
+begin_relation
+ flag = 0
+ Mf ={a, b, c, GocA}
+ rf =1
+ vf ={a}
+ expf =` a^2 = b^2 + c^2 - 2*b*c*cos(GocA)`
+ cost=19
+ end_relation
+ begin_relation
+ flag = 1
+ Mf ={ a, b, GocA, GocB}
+ rf =1
+ vf ={}
+ expf = `a*sin(GocB) = b*sin(GocA) `
+ cost=8
+ end_relation
+ ...
+end_computation_relations
+begin_rules
+ begin_rule
+ kind_rule = "";
+ hypothesis_part:
+ {GocA = GocB}
+ goal_part:
+ {a = b}
+end_rule
+ begin_rule
+ kind_rule = "";
+ hypothesis_part:
+ {a = b}
+ goal_part:
+ {GocA = GocB }
+ end_rule
+ begin_rule
+ kind_rule = "";
+ hypothesis_part:
+ {a^2 = b^2+c^2}
+ goal_part:
+ {GocA=pi/2}
+ end_rule
+ begin_rule
+ kind_rule = "";
+ hypothesis_part:
+{GocA=pi/2}
+ goal_part:
+ {a^2 = b^2+c^2}
+ end_rule
+ begin_rule
+ kind_rule = "xac_dinh_doi_tuong";
+ hypothesis_part:
+ {a, b, c}
+ goal_part:
+ {"Object"}
+ end_rule
+ ...
+end_rules
+end_object

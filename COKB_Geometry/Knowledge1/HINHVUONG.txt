@@ -1,0 +1,88 @@
+begin_object: HINH_VUONG[A,B,C,D]
+ A, B, C, D : DIEM;
+begin_variables
+ a : DOAN[A,B]; # canh 
+ b : DOAN[B,C]; # canh 
+ c : DOAN[C,D]; # canh
+ d : DOAN[D,A]; # canh
+ c1 : DOAN[A,C]; # duong cheo
+ c2 : DOAN[B,D]; # duong cheo
+ GA : GOC[D,A,B]; # goc
+ GB : GOC[A,B,C]; # goc
+ GC : GOC[B,C,D]; # goc
+ GD : GOC[C,D,A]; # goc
+ S , p : real;
+end_variables
+begin_constraints
+ S > 0;
+ p > 0;
+end_constraints
+begin_properties
+ GA = Pi / 2;
+ GB = Pi / 2;
+ GC = Pi / 2;
+ GD = Pi / 2;
+ b = a;
+ c = a;
+ d = a;
+ ["VUONG", a, b];
+ ["VUONG", b, c];
+ ["VUONG", c, d];
+["VUONG", d, a];
+ ["SSONG", a, c];
+ ["SSONG", b, d];
+ ["VUONG", c1, c2];
+end_properties
+begin_computation_relations
+ begin_relation 0
+ flag=1
+ Mf={a,b}
+ rf=1
+ vf={}
+ expf= `b = a`
+ cost = 1
+ end_relation
+ begin_relation 1
+ flag=1
+ Mf={a,c}
+ rf=1
+ vf={}
+ expf=`c=a`
+ cost=1
+ end_relation
+ begin_relation 2
+ flag=1
+ Mf={a,d}
+ rf=1
+ vf={}
+ expf=`d=a`
+ cost=1
+ end_relation
+ begin_relation 3
+ flag=1
+ Mf={a,c1}
+ rf=1
+ vf={}
+ expf=`c1 = a*sqrt(2)`
+ cost=12
+ end_relation
+ begin_relation 4
+ flag=1
+ Mf={c1,c2}
+ rf=1
+ vf={}
+ expf=`c1 = c2`
+cost=1
+ end_relation
+...
+end_computation_relations
+begin_rules
+ begin_rule 1
+ kind_rule = "xac_dinh_doi_tuong";
+ hypothesis_part:
+ {a}
+ goal_part:
+ {"Object"}
+ end_rule
+end_rules
+end_object

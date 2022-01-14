@@ -1,0 +1,5 @@
+begin_operators
+[+,MATRAN,MATRAN,MATRAN]
+[*,MATRAN,MATRAN,MATRAN]
+[*,MATRAN,INT,MATRAN]
+end_operators

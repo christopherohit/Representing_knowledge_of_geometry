@@ -1,0 +1,73 @@
+begin_concept:VECTOR
+begin_variables
+u:list
+A:MATRAN
+p:string
+m:INT
+end_variables
+begin_constraints
+end_constraints
+begin_properties
+A.K=PHUONGTRINHVECTOR(u)
+A.m=SODONG(A)
+A.n=SOCOT(A)
+m=CHIEUVECTOR(V)
+HANG(A)
+end_properties
+begin_computation_relations
+end_computation_relations
+begin_rules
+begin_rule
+kind_rules = doc lap tuyen tinh
+hypothesis_part: 
+m=HANG(A)
+end_hypothesis_part
+goal_part:  
+p
+p=["doc lap tuyen tinh"]   
+end_goal_part
+end_rule
+begin_rule
+kind_rules = phu thuoc tuyen tinh
+hypothesis_part:  
+[">",m,n]
+end_hypothesis_part
+goal_part:  
+p  
+p=["phu thuoc tuyen tinh"]
+end_goal_part
+end_rule
+begin_rule
+kind_rules = phu thuoc tuyen tinh
+hypothesis_part:  
+[">",m,HANG(A)]
+end_hypothesis_part
+goal_part:  
+p  
+p=["phu thuoc tuyen tinh"]
+end_goal_part
+end_rule
+begin_rule
+kind_rules = phu thuoc tuyen tinh
+hypothesis_part:  
+A.m=A.n
+DINHTHUC(A)=0
+end_hypothesis_part
+goal_part:  
+p  
+p=["phu thuoc tuyen tinh"]
+end_goal_part
+end_rule
+begin_rule
+kind_rules = doc lap tuyen tinh
+hypothesis_part:  
+A.m=A.n
+[">",DINHTHUC(A),0]
+end_hypothesis_part
+goal_part:  
+p  
+p=["phu thuoc tuyen tinh"]
+end_goal_part
+end_rule
+end_rules
+end_concept

@@ -1,0 +1,25 @@
+begin_rules
+begin_rule
+kind_rule = XAC DINH TAM GIAC DEU
+_T : TAMGIAC
+_A : DOANAC
+_B : DOANBA
+_C : DOANCB
+hypothesis_part:
+_A*2 = _B + _C
+end_hypothesis_part
+goal_part:
+[_T, "TAM GIAC DEU"]
+end_goal_part
+end_rule
+begin_rule
+kind_rule = XAC DINH TAM GIAC VUONG
+_T : TAMGIAC
+_A : GOCA
+_B : GOCB
+_C : GOCC
+hypothesis_part:
+_A or _B or_C = 90
+end _hypothesis_part
+goal_part:
+[_T, "TAMGIACVUONG"]

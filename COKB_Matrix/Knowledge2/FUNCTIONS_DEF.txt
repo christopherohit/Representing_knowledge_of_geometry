@@ -1,0 +1,184 @@
+begin_functions
+begin_function:DINHTHUC(_A)
+_A: MATRANVUONG
+result: REAL
+begin_proc
+LinearAlgebra:-Determinant(convert(_A.K,'Matrix'));
+end_proc
+properties
+end_properties
+show: true
+end_function
+begin_function:HANG(_A)
+_A: MATRAN
+result: INT
+begin_proc
+rAnK := 0: VALuE := convert(BDSOCAP(_A), 'Matrix'): COlMATriX:=_A.n: RoWMAtrIx:=_A.m: for i to RoWMAtrIx do if not LinearAlgebra:-Equal(LinearAlgebra:-Row(VALuE, i), LinearAlgebra:-ZeroVector[row](COlMATriX)) then rAnK := rAnK+1: else rAnK: end if: end do: rAnK;
+end_proc
+properties
+BDSOCAP(_A)
+end_properties
+show: true
+end_function
+begin_function:NGHIEM(_W)
+_W: HEPHUONGTRINH
+result: Array
+begin_proc
+MaTRAnMoRONg:=convert(BDSOCAP(_W.Q),'Matrix'): HaNgMr:=HANG(_W.Q): HaNgHs:=_W.a: if (HaNgMr=HaNgHs and HaNgMr=(LinearAlgebra:-ColumnDimension(MaTRAnMoRONg))-1) then REsUlT:=LinearAlgebra:-Column(MaTRAnMoRONg, LinearAlgebra:-ColumnDimension(MaTRAnMoRONg)): convert(REsUlT,'list'); else `` end if: 
+end_proc
+properties
+end_properties
+show: true
+end_function
+begin_function:SODONG(_Q)
+_Q: MATRAN
+result: INT
+begin_proc
+ArrayTools:-Size(_Q.K)[1];
+end_proc
+properties
+end_properties
+show: false
+end_function
+begin_function:SOCOT(_Q)
+_Q: MATRAN
+result: INT
+begin_proc
+ArrayTools:-Size(_Q.K)[2];
+end_proc
+properties
+end_properties
+show: false
+end_function
+begin_function:MORONG(_A,_B)
+_A: MATRAN
+_B: MATRAN
+result: Array
+begin_proc
+convert((<convert(_A.K,'Matrix')|convert(_B.K,'Vector[column]')>),'Array');
+end_proc
+properties
+end_properties
+show: true
+end_function
+begin_function:BDSOCAP(_A)
+_A: MATRAN
+result: Array
+begin_proc
+ChECk:=true: MAtriX:=_A.K: for i from 1 to _A.m do for j from 1 to _A.n do if (not type(MAtriX[i][j],'numeric') and type(MAtriX[i][j],'symbol')) then ChECk:=false: break: end if end do: if (ChECk=false) then break: end if: end do: if (ChECk=true) then convert(LinearAlgebra:-ReducedRowEchelonForm(convert(MAtriX,'Matrix')),'Array'); else convert(LinearAlgebra:-GaussianElimination(convert(MAtriX,'Matrix')),'Array'); end if:
+end_proc
+properties
+end_properties
+show: true
+end_function
+begin_function:NGHICHDAO(_A)
+_A: MATRANKHANGHICH
+result: Array
+begin_proc
+MOrONg:=BDSOCAP(_A.Q): if (not type(MOrONg,'function')) then MOrONg(1 .. _A.m, _A.n+1 .. _A.n*2) else `` end if:
+end_proc
+properties
+BDSOCAP(_A.Q)
+end_properties
+show: true
+end_function
+begin_function:MORONGNGHICHDAO(_A)
+_A: MATRANKHANGHICH
+result: Array
+begin_proc
+convert((<convert(_A.K,'Matrix')|LinearAlgebra:-IdentityMatrix(_A.n)>),'Array');
+end_proc
+properties
+_A.Q.n=SOCOT(_A.Q)
+_A.Q.m=SODONG(_A.Q)
+end_properties
+show: true
+end_function
+begin_function:HESO(_W)
+_W: HEPHUONGTRINH
+result: Array
+begin_proc
+HeSo:=[]: hS:=_W.p: for i from 1 to nops(_W.K) do tEMp:=[]: for j from 1 to nops(hS) do tEMp:=[op(tEMp),coeff(lhs(op(i,_W.K)),op(j, hS))]: end do: HeSo:=[op(HeSo), tEMp]: end do: convert(HeSo,'Array');
+end_proc
+properties
+end_properties
+show: true
+end_function
+begin_function:HESOTUDO(_W)
+_W: HEPHUONGTRINH
+result: Array
+begin_proc
+HsTd:=[]; for i from 1 to nops(_W.K) do HsTd:=[op(HsTd),rhs(op(i,_W.K))]; end do: convert(HsTd,'Array');
+end_proc
+properties
+end_properties
+show: false
+end_function
+begin_function:PHUONGTRINHVECTOR(_u)
+_u: list
+result: Array
+begin_proc
+Array([op(_u)]);
+end_proc
+properties
+end_properties
+show: true
+end_function
+begin_function:CHIEUVECTOR(_V)
+_V: VECTOR
+result: INT
+begin_proc
+nops(_V.u);
+end_proc
+properties
+end_properties
+show: true
+end_function
+begin_function:MORONGCOSO(_V,_W)
+_V: VECTOR
+_W: VECTOR
+result: Array
+begin_proc
+convert((<LinearAlgebra:-Transpose(convert(Array([op(_V.u)]),'Matrix'))|LinearAlgebra:-Transpose(convert(Array([op(_W.u)]),'Matrix'))>),'Array');
+end_proc
+properties
+end_properties
+show: true
+end_function
+begin_function:DOICOSO(_V,_W)
+_V: VECTOR
+_W: VECTOR
+result: Array
+begin_proc
+MoRongCSo:=convert(MORONGCOSO(_V,_W), 'Array'): convert(LinearAlgebra:-ReducedRowEchelonForm(convert(MoRongCSo,'Matrix')),'Array'); 
+end_proc
+properties
+MORONGCOSO(_V,_W)
+end_properties
+show: true
+end_function
+begin_function:MATRANDOICOSO(_V,_W)
+_V: VECTOR
+_W: VECTOR
+result: Array
+begin_proc
+MaTrAnMoRongCOSo:=convert(DOICOSO(_V,_W), 'Array'): MaTrAnMoRongCOSo(1..ArrayTools:-Size(MaTrAnMoRongCOSo)[1], (round(ArrayTools:-Size(MaTrAnMoRongCOSo)[2]/2)+1)..(ArrayTools:-Size(MaTrAnMoRongCOSo)[2]));
+end_proc
+properties
+DOICOSO(_V,_W)
+end_properties
+show: true
+end_function
+begin_function:NGHIEMPT(_Q)
+_Q: PHUONGTRINHMT
+result: Array
+begin_proc
+convert(LinearAlgebra:-MatrixMatrixMultiply(convert(_Q.T.K, 'Matrix'), convert(_Q.B.K, 'Matrix')), 'Array');
+end_proc
+properties
+end_properties
+show: true
+end_function
+end_functions
+
+

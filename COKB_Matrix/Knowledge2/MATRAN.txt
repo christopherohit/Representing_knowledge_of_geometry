@@ -1,0 +1,18 @@
+begin_concept:MATRAN
+begin_variables
+m: INT
+n: INT
+K: Array
+end_variables
+begin_constraints
+end_constraints
+begin_properties
+m=SODONG(A)
+n=SOCOT(A)
+HANG(A)
+end_properties
+begin_computation_relations
+end_computation_relations
+begin_rules
+end_rules
+end_concept

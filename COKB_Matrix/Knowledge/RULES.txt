@@ -1,0 +1,36 @@
+begin_rules
+begin_rule
+kind_rule = XAC DINH MA TRAN VUONG
+_A : MATRAN
+hypothesis_part:
+_A.m = _A.n
+_A.n = _A.m
+end_hypothesis_part
+goal_part:     
+[_A, "MATRANVUONG"]
+end_goal_part
+end_rule
+begin_rule
+kind_rule = XAC DINH MATRAN KHA NGHICH
+_A : MATRANVUONG
+hypothesis_part:
+HANG(_A)=_A.n
+end_hypothesis_part
+goal_part:     
+[_A, "MATRANKHANGHICH"]
+end_goal_part
+end_rule
+begin_rule
+kind_rule = TINH CHAT HAI MA TRAN BANG NHAU
+_A : MATRAN
+_B : MATRAN
+hypothesis_part:
+["BANGNHAU", _A, _B]
+end_hypothesis_part
+goal_part:     
+_A.m = _B.m
+_A.n = _B.m
+_A.K = _B.K
+end_goal_part
+end_rule
+end_rules

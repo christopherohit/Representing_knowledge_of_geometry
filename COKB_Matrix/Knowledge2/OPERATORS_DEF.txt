@@ -1,0 +1,43 @@
+begin_operators   
+begin_operator:*(_A,_B)
+_A:MATRAN
+_B:MATRAN
+result: MATRAN
+begin_proc
+REsult:=Array(1.._A.m,1.._B.n):  PARAm1:=_A.K: PARAm2:=_B.K: for i from 1 to _A.m do for j from 1 to _B.n do for k from 1 to _A.n do REsult[i,j]:= REsult[i,j] + PARAm1[i][k]*PARAm2[k][j]: end do: end do: end do: {_.K= REsult, _.m=_A.m, _.n=_B.n};
+end_proc
+properties
+end_properties
+end_operator
+begin_operator:+(_A,_B)
+_A:MATRAN
+_B:MATRAN
+result: MATRAN
+begin_proc
+REsult:=Array(1.._A.m,1.._A.n):  PARAm1:=_A.K: PARAm2:=_B.K: if (_A.m = _B.m and _A.n = _B.n ) then for i from 1 to _A.m do for j from 1 to _A.n do REsult[i,j]:= PARAm1[i][j]+ PARAm2[i][j]: end do: end do: {_.K= REsult, _.m=_A.m, _.n=_A.n} else `` end if:  
+end_proc
+properties
+end_properties
+end_operator
+begin_operator:*(_a,_B)
+_a:INT
+_B:MATRAN
+result: MATRAN
+begin_proc
+REsult:=Array(1.._B.m,1.._B.n):  PARAm:=_B.K: for i from 1 to _B.m do for j from 1 to _B.n do REsult[i,j]:= _a * PARAm[i][j]: end do: end do: {_.K= REsult, _.m=_B.m, _.n=_B.n};
+end_proc
+properties
+end_properties
+end_operator
+begin_operator:-(_A,_B)
+_A:MATRAN
+_B:MATRAN
+result: MATRAN
+begin_proc
+REsult:=Array(1.._A.m,1.._A.n):  PARAm1:=_A.K: PARAm2:=_B.K: if (_A.m = _B.m and _A.n = _B.n ) then for i from 1 to _A.m do for j from 1 to _A.n do REsult[i,j]:= PARAm1[i][j]- PARAm2[i][j]: end do: end do: {_.K= REsult, _.m=_A.m, _.n=_A.n} else `` end if:  
+end_proc
+properties
+end_properties
+end_operator
+
+end_operators

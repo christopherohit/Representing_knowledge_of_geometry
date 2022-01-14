@@ -1,0 +1,32 @@
+begin_concept:PHUONGTRINHMT
+begin_variables
+A:MATRANKHANGHICH
+B:MATRAN
+T:MATRAN
+end_variables
+begin_constraints
+end_constraints
+begin_properties
+T.K=NGHICHDAO(A)
+T.m=SODONG(T)
+T.n=SOCOT(T)
+A.m=SODONG(A)
+A.n=SOCOT(A)
+B.m=SODONG(B)
+B.n=SOCOT(B)
+[A,"MATRANKHANGHICH"]
+end_properties
+begin_computation_relations
+end_computation_relations
+begin_rules
+begin_rule
+kind_rules = MTKN
+hypothesis_part:  
+A.m=A.n
+end_hypothesis_part
+goal_part: 
+[A, "MATRANKHANGHICH"]
+end_goal_part
+end_rule
+end_rules
+end_concept
