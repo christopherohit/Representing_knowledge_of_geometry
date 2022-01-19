@@ -3,4 +3,12 @@ numpy
 matplotlib
 nltk
 seaborn
-sklearn
+pyvi
+vncorenlp
+gensim
+Cython
+fasttext
+scipy
+future
+underthesea
+joblib
